@@ -4,16 +4,17 @@
   "main": "index.js",
   "license": "ISC",
   "dependencies": {
-    "lodash.find": "^4.6.0",
-    "lodash.map": "^4.6.0",
     "path-to-regexp": "^2.2.1"
   },
   "author": "Ryan Burnette <ryan.burnette@gmail.com>",
   "scripts": {
-    "test": "mocha test.js"
+    "test": "mocha --recursive test/",
+    "development": "nodemon --watch lib/*.js --exec 'mocha --recursive test/ || true'"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.3",
+    "pryjs": "^1.0.3"
   }
 }
