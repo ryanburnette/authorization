@@ -4,7 +4,7 @@ var mocha = require('mocha');
 var describe = mocha.describe;
 var chai = require('chai');
 var expect = chai.expect;
-var { lookupFactory } = require('../');
+var pathroles = require('../');
 
 var Rules = [
   ['/api/items', 'GET', 'user,admin'],
@@ -12,7 +12,7 @@ var Rules = [
   ['/api/(.*)', '*', 'guest,user,admin']
 ];
 
-var lookup = lookupFactory(Rules);
+var lookup = pathroles(Rules);
 
 describe('#lookup()', function() {
   it('returns roles for an exactly matched path', function() {

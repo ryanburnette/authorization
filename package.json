@@ -1,5 +1,6 @@
 {
   "name": "@ryanburnette/pathroles",
+  "description": "A strategy for looking up authorization roles by path.",
   "version": "1.0.0",
   "main": "index.js",
   "license": "ISC",
@@ -9,6 +10,9 @@
   "author": "Ryan Burnette <ryan.burnette@gmail.com> (https://ryanburnette.com)",
   "repository": {
     "type": "git",
-    "url": "https://code.ryanburnette.com/ryanburnette/pathroles.git"
+    "url": "https://github.com/ryanburnette/pathroles.git"
+  },
+  "scripts": {
+    "test": "mocha"
   }
 }
