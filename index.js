@@ -1,1 +1,3 @@
-module.exports = require('./lib/lookup-factory')
+'use strict';
+
+module.exports.lookupFactory = require('./lib/lookup-factory');

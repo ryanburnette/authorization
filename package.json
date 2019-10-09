@@ -1,20 +1,14 @@
 {
-  "name": "path-roles",
-  "version": "0.2.1",
+  "name": "@ryanburnette/pathroles",
+  "version": "1.0.0",
   "main": "index.js",
   "license": "ISC",
   "dependencies": {
-    "path-to-regexp": "^2.2.1"
+    "path-to-regexp": "^3.1.0"
   },
-  "author": "Ryan Burnette <ryan.burnette@gmail.com>",
-  "scripts": {
-    "test": "mocha --recursive test/",
-    "development": "nodemon --watch lib/*.js --exec 'mocha --recursive test/ || true'"
-  },
-  "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.18.3",
-    "pryjs": "^1.0.3"
+  "author": "Ryan Burnette <ryan.burnette@gmail.com> (https://ryanburnette.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://code.ryanburnette.com/ryanburnette/pathroles.git"
   }
 }

@@ -1,9 +1,7 @@
-# Path Roles
+# @ryanburnette/[pathroles][2]
 
 A strategy for declaring authorization rules in the form of a path, HTTP verbs,
 and roles.
-
-## Usage
 
 Declaration of rules is in the form of an array of arrays, with each item in
 the main array being an array with a three items: a path, verbs, and roles.
@@ -17,35 +15,50 @@ Roles are also declared as a comma-separated string.
 Declare rules in order of more specific to less specific. Roles will be
 returned for the first rule that matches.
 
-If no rules match, an error will be thrown. This is intended to prevent having
-a route that doesn't have an explicitly declared rule.
+All paths must be explicity set. If no rules match, an error will be thrown.
 
-```javascript
-var lookupFactory = require('path-roles')
+## Usage
 
-var Rules = [
-  ['/api/items','GET','user,admin'],
-  ['/api/items','POST','admin'],
-  ['/api/(.*)','*','guest,user,admin']
-]
+The library provides the `#lookupFactory()` method which creates
+`#lookup()` methods based on the provided rules.
 
-var lookup = lookupFactory(Rules)
+```js
+var { lookupFactory } = require('@ryanburnette/pathroles');
 
-lookup('/api/items','GET')
+var rules = [
+  ['/api/items', 'GET', 'user,admin'],
+  ['/api/items', 'POST', 'admin'],
+  ['/api/(.*)', '*', 'guest,user,admin']
+];
+
+var lookup = lookupFactory(rules);
+
+module.exports = lookup;
+
+lookup('/api/items', 'GET');
 // ['user','admin']
 ```
 
-## Implementation Example (Express)
+Use the lookup in your authorization middleware to get the roles
+allowed for the current path.
 
-```javascript
-app.use(function (req,res,next) {
-  if ( lookup(req.originalUrl,req.method).includes(session.role) ) {
-    next()
+```js
+app.use(function(req, res, next) {
+  if (!lookup(req.originalUrl, req.method).includes(req.user.role)) {
+    res.statusCode = 401;
+    res.end();
+    return;
   }
-  else {
-    throw new Error('unauthorized')
-  }
-})
+  next();
+});
+```
+
+## Test
+
+```
+npm install --no-save mocha chai
+node_modules/.bin/mocha
 ```
 
 [1]: https://github.com/pillarjs/path-to-regexp
+[2]: https://code.ryanburnette.com/ryanburnette/pathroles
