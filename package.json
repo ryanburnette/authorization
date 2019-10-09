@@ -1,20 +1,18 @@
 {
-  "name": "path-roles",
-  "version": "0.2.1",
+  "name": "@ryanburnette/pathroles",
+  "description": "A strategy for looking up authorization roles by path.",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "ISC",
   "dependencies": {
-    "path-to-regexp": "^2.2.1"
+    "path-to-regexp": "^3.1.0"
   },
-  "author": "Ryan Burnette <ryan.burnette@gmail.com>",
+  "author": "Ryan Burnette <ryan.burnette@gmail.com> (https://ryanburnette.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryanburnette/pathroles.git"
+  },
   "scripts": {
-    "test": "mocha --recursive test/",
-    "development": "nodemon --watch lib/*.js --exec 'mocha --recursive test/ || true'"
-  },
-  "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.18.3",
-    "pryjs": "^1.0.3"
+    "test": "mocha"
   }
 }
