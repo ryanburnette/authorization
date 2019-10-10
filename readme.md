@@ -1,6 +1,6 @@
 # [pathroles][1]
 
-[![npm version](https://badge.fury.io/js/%40ryanburnette%2Fpathroles.svg)](https://badge.fury.io/js/%40ryanburnette%2Fpathroles)
+[![repo](https://img.shields.io/badge/repository-Github-black.svg?style=flat-square)](https://github.com/ryanburnette/pathroles) [![npm](https://img.shields.io/badge/package-NPM-green.svg?style=flat-square)](https://www.npmjs.com/package/@ryanburnette/pathroles)
 
 A strategy for looking up authorization roles by path.
 
