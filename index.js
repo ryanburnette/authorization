@@ -1,18 +1,40 @@
 'use strict';
 
-var _rules = require('./lib/rules');
-var find = require('./lib/find');
+const { intersection } = require('lodash');
 
-module.exports = function(rulesArr) {
-  var rules = _rules(rulesArr);
-  return function(path, verb) {
-    var found = rules.find(function(rule) {
-      return find(rule, path, verb);
-    });
-    if (found) {
-      return found.roles;
-    } else {
-      throw new Error(`no defined rule matches ${path}`);
+function pathroles(opts) {
+  if (!opts) {
+    opts = {};
+  }
+
+  if (!opts.methods) {
+    opts.methods = [
+      'GET',
+      'HEAD',
+      'POST',
+      'PUT',
+      'DELETE',
+      'CONNECT',
+      'OPTIONS',
+      'TRACE',
+      'PATCH'
+    ];
+  }
+
+  if (!opts.roles) {
+    opts.roles = [];
+  }
+
+  return function (req, res, next) {
+    if (
+      req.user &&
+      req.user.roles &&
+      intersection(req.user.roles, opts.roles).length
+    ) {
+      return next();
     }
+    res.sendStatus(401);
   };
-};
+}
+
+module.exports = pathroles;
