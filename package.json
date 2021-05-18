@@ -1,13 +1,13 @@
 {
-  "name": "@ryanburnette/pathroles",
-  "description": "One strategy for NodeJs HTTP authorization middleware.",
-  "version": "2.0.0",
+  "name": "@ryanburnette/authorization",
+  "description": "A really simple Node.js authorization library.",
+  "version": "3.0.0",
   "main": "index.js",
   "license": "ISC",
   "author": "Ryan Burnette <ryan.burnette@gmail.com> (https://ryanburnette.com)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ryanburnette/pathroles.git"
+    "url": "https://github.com/ryanburnette/authorization.git"
   },
   "scripts": {
     "test": "mocha"

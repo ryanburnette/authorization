@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var pathroles = require('./index.js');
+var authorization = require('./index.js');
 
 var app = express();
 
@@ -12,7 +12,7 @@ app.get(
     req.user.roles = ['user'];
     next();
   },
-  pathroles({ methods: ['GET'], roles: ['admin'] }),
+  authorization({ methods: ['GET'], roles: ['admin'] }),
   function (req, res) {
     res.sendStatus(200);
   }
@@ -25,7 +25,7 @@ app.get(
     req.user.roles = ['user'];
     next();
   },
-  pathroles({ methods: ['GET'], roles: ['admin', 'user'] }),
+  authorization({ methods: ['GET'], roles: ['admin', 'user'] }),
   function (req, res) {
     res.sendStatus(200);
   }

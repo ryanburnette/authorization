@@ -2,7 +2,7 @@
 
 const { intersection } = require('lodash');
 
-function pathroles(opts) {
+function authorization(opts) {
   if (!opts) {
     opts = {};
   }
@@ -26,15 +26,16 @@ function pathroles(opts) {
   }
 
   return function (req, res, next) {
-    if (
-      req.user &&
-      req.user.roles &&
-      intersection(req.user.roles, opts.roles).length
-    ) {
-      return next();
+    if (opts.methods.includes(req.method)) {
+      if (!req.user) {
+        return res.sendStatus(401);
+      }
+      if (!intersection(opts.roles, req.user.roles).length) {
+        return res.sendStatus(401);
+      }
     }
-    res.sendStatus(401);
+    next();
   };
 }
 
-module.exports = pathroles;
+module.exports = authorization;
