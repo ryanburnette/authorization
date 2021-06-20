@@ -1,7 +1,7 @@
 {
   "name": "@ryanburnette/authorization",
   "description": "A really simple Node.js authorization library.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "index.js",
   "license": "ISC",
   "author": "Ryan Burnette <ryan.burnette@gmail.com> (https://ryanburnette.com)",
