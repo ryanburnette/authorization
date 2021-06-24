@@ -28,10 +28,12 @@ function authorization(opts) {
   return function (req, res, next) {
     if (opts.methods.includes(req.method)) {
       if (!req.user) {
-        return res.sendStatus(401);
+        next(new Error('UNAUTHORIZED_FOR_HTTP_METHOD'));
+        return;
       }
       if (!intersection(opts.roles, req.user.roles).length) {
-        return res.sendStatus(401);
+        next(new Error('UNAUTHORIZED_FOR_USER_ROLE'));
+        return;
       }
     }
     next();
