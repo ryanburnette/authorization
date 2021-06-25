@@ -1,7 +1,7 @@
 {
   "name": "@ryanburnette/authorization",
-  "description": "A really simple Node.js authorization library.",
-  "version": "3.0.1",
+  "description": "An excruciatingly simple authorization strategy for Node.js http apps.",
+  "version": "4.0.0",
   "main": "index.js",
   "license": "ISC",
   "author": "Ryan Burnette <ryan.burnette@gmail.com> (https://ryanburnette.com)",
@@ -10,13 +10,6 @@
     "url": "https://github.com/ryanburnette/authorization.git"
   },
   "scripts": {
-    "test": "mocha"
-  },
-  "dependencies": {
-    "lodash": "^4.17.21"
-  },
-  "devDependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.7"
+    "test": "npx mocha"
   }
 }
