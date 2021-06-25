@@ -59,4 +59,11 @@ app.use(function (err, req, res, next) {
 });
 ```
 
+## Test
+
+```
+npm install --no-save express axios
+node test.js
+```
+
 [1]: https://github.com/ryanburnette/authorization
