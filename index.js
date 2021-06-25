@@ -1,8 +1,6 @@
 'use strict';
 
-const { intersection } = require('lodash');
-
-function authorization(opts) {
+module.exports = function authorization(opts) {
   if (!opts) {
     opts = {};
   }
@@ -22,20 +20,27 @@ function authorization(opts) {
   }
 
   if (!opts.roles) {
-    opts.roles = [];
+    opts.roles = ['user'];
   }
 
-  return function (req, res, next) {
+  return function authorize(req, res, next) {
     if (opts.methods.includes(req.method)) {
       if (!req.user) {
-        return res.sendStatus(401);
+        let err = new Error('Unauthorized: req.user is required');
+        err.code = 'UNAUTHORIZED';
+        next(err);
+        return;
       }
-      if (!intersection(opts.roles, req.user.roles).length) {
-        return res.sendStatus(401);
+      var allowedRoles = opts.roles.filter(function (role) {
+        return req.user.roles.includes(role);
+      });
+      if (!allowedRoles.length) {
+        let err = new Error('Unauthorized: user does not have required role');
+        err.code = 'UNAUTHORIZED';
+        next(err);
+        return;
       }
     }
     next();
   };
-}
-
-module.exports = authorization;
+};
