@@ -10,6 +10,6 @@
     "url": "https://github.com/ryanburnette/authorization.git"
   },
   "scripts": {
-    "test": "npx mocha"
+    "test": "node test.js"
   }
 }
