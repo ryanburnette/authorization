@@ -13,6 +13,13 @@ npm install @ryanburnette/authorization
 
 ## Usage
 
+This strategy makes a couple assumptions.
+
+- `req.user` is an object that describes this user
+- `req.user.roles` is an array of strings that describes the roles this user has
+
+A basic implementation looks something like this.
+
 ```js
 var authorization = require('@ryanburnette/authorization');
 
