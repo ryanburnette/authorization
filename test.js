@@ -1,8 +1,7 @@
 'use strict';
 
-var express = require('express');
-var authorization = require('./index.js');
-var axios = require('axios');
+import express from 'express';
+import Authorization from './index.js';
 
 var app = express();
 
@@ -13,7 +12,7 @@ app.get(
     req.user.roles = ['user'];
     next();
   },
-  authorization({ methods: ['GET'], roles: ['admin'] }),
+  Authorization.middleware({ methods: ['GET'], roles: ['admin'] }),
   function (req, res) {
     res.sendStatus(200);
   }
@@ -26,7 +25,7 @@ app.get(
     req.user.roles = ['user'];
     next();
   },
-  authorization({ methods: ['GET'], roles: ['admin', 'user'] }),
+  Authorization.middleware({ methods: ['GET'], roles: ['admin', 'user'] }),
   function (req, res) {
     res.sendStatus(200);
   }
@@ -43,30 +42,23 @@ app.use(function (err, req, res, next) {
   console.error(err);
 });
 
-app.listen(3000);
+app.listen(3468);
 
 [
   async function () {
     console.log(
       'TEST: Get without having allowed role, should in caught error that we handle and return 401 in this test'
     );
-    var response = await axios
-      .get('http://127.0.0.1:3000/api/foo')
-      .catch((error) => error.response);
-
-    if (response.status === 401) {
+    let resp = await fetch('http://127.0.0.1:3468/api/foo');
+    if (resp.status === 401) {
       console.log('  PASS');
     } else {
       console.log('  FAIL');
     }
   },
   async function () {
-    console.log('TEST: Get with appropriate role, should result in 200');
-    var response = await axios
-      .get('http://127.0.0.1:3000/api/bar')
-      .catch((error) => error.response);
-
-    if (response.status === 200) {
+    let resp = await fetch('http://127.0.0.1:3468/api/bar');
+    if (resp.status === 200) {
       console.log('  PASS');
     } else {
       console.log('  FAIL');
