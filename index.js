@@ -40,8 +40,8 @@ Authorization.middleware = function (opts) {
       return req.user.roles.includes(role);
     });
     if (!allowedRoles.length) {
-      let err = new Error('Unauthorized: user does not have required role');
-      err.code = 'UNAUTHORIZED';
+      let err = new Error('Forbidden: user does not have required role');
+      err.code = 'E_FORBIDDEN';
       next(err);
       return;
     }

@@ -1,7 +1,7 @@
 {
   "name": "@ryanburnette/authorization",
   "description": "An excruciatingly simple authorization strategy for Node.js http apps.",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "main": "index.js",
   "license": "ISC",
   "author": "Ryan Burnette <ryan.burnette@gmail.com> (https://ryanburnette.com)",

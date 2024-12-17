@@ -3,12 +3,12 @@
 [![repo](https://img.shields.io/badge/repository-Github-black.svg?style=flat-square)](https://github.com/ryanburnette/authorization)
 [![npm](https://img.shields.io/badge/package-NPM-green.svg?style=flat-square)](https://www.npmjs.com/package/@ryanburnette/authorization)
 
-An excruciatingly simple authorization strategy for Node.js http apps.
+A stupid simple authorization strategy for APIs.
 
 ## Installation
 
 ```bash
-npm install @ryanburnette/authorization
+npm install --save @ryanburnette/authorization
 ```
 
 ## Usage
@@ -21,13 +21,13 @@ This strategy makes a couple assumptions.
 A basic implementation looks something like this.
 
 ```js
-var authorization = require('@ryanburnette/authorization');
+import Authorization from '@ryanburnette/authorization';
 
 // use it on a group of endpoints
 app.use(
   '/api/widgets',
-  authorization({ methods: ['GET', 'POST'], roles: ['user', 'admin'] }),
-  authorization({ methods: ['DELETE'], roles: ['admin'] }),
+  Authorization.middleware({ methods: ['GET', 'POST'], roles: ['user', 'admin'] }),
+  Authorization.middleware({ methods: ['DELETE'], roles: ['admin'] }),
   function (req, res) {
     res.statusCode = 200;
     res.end();
@@ -38,7 +38,7 @@ app.use(
 // use it on a single endpoint
 app.get(
   '/api/employees',
-  authorization({ roles: ['user', 'admin'] }),
+  Authorization.middleware({ roles: ['user', 'admin'] }),
   function (req, res) {
     res.statusCode = 200;
     res.end();
@@ -48,8 +48,8 @@ app.get(
 
 app.use(function (err, req, res, next) {
   // catch errors from this strategy
-  if (err.code === 'UNAUTHORIZED') {
-    res.statusCode = 401;
+  if (err.code === 'E_FORBIDDEN') {
+    res.statusCode = 403;
     res.end();
     return;
   }
@@ -61,9 +61,9 @@ app.use(function (err, req, res, next) {
 
 ## Test
 
-```
-npm install --no-save express axios
-node test.js
+```sh
+npm install --no-save express
+npm test
 ```
 
 [1]: https://github.com/ryanburnette/authorization

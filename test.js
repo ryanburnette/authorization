@@ -32,8 +32,8 @@ app.get(
 );
 
 app.use(function (err, req, res, next) {
-  if (err.code === 'UNAUTHORIZED') {
-    res.statusCode = 401;
+  if (err.code === 'E_FORBIDDEN') {
+    res.statusCode = 403;
     res.json({ message: err.message });
     return;
   }
@@ -50,7 +50,7 @@ app.listen(3468);
       'TEST: Get without having allowed role, should in caught error that we handle and return 401 in this test'
     );
     let resp = await fetch('http://127.0.0.1:3468/api/foo');
-    if (resp.status === 401) {
+    if (resp.status === 403) {
       console.log('  PASS');
     } else {
       console.log('  FAIL');
